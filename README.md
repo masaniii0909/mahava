@@ -6,11 +6,17 @@ trying to make this as local as possible rn and have only been doing some basic 
 
 # reqs
 requires the following:
-linux (tested on arch only)
-python 3.12
-vosk
-ollama
-tts_with_rvc
+
+linux (tested on arch only), 
+
+python 3.12, 
+
+vosk, 
+
+ollama, 
+
+tts_with_rvc, 
+
 sounddevice
 
 # disclaimer
