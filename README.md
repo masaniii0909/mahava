@@ -7,15 +7,15 @@ trying to make this as local as possible rn and have only been doing some basic 
 # reqs
 requires the following:
 
-linux (tested on arch only), 
+linux (tested on arch only)
 
-python 3.12, 
+python 3.12
 
-vosk, 
+vosk
 
-ollama, 
+ollama
 
-tts_with_rvc, 
+tts_with_rvc (why this requires 3.12 smh)
 
 sounddevice
 
