@@ -38,4 +38,5 @@ requires the following:
 - sounddevice
 
 # disclaimer
-only has been tested on a pc with ryzen 7 5800x, rtx 3060 12G, and 32G ddr4 ram. i am unsure of the performance on other lower end devices but it is blazingly fast on my mid range pc. i am still learning about python (little to no knowledge on classes, generators, file management modules like numpy or pandas does) so this project will only get better as i have time (and discipline) to learn.
+has been tested on two pcs, one with a ryzen 7 5800xt and nvidia 3060. it is very fast on that machine.
+but on another machine with an intel i7 8th gen and 1660ti, it is pretty slow, especially because of the tts with rvc. i'll release a server version where something like an rpi could be a mic+speaker and sends the vosk speech recognition to a pc. 
