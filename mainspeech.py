@@ -3,30 +3,31 @@ import sys
 import os
 from tts_with_rvc import TTS_RVC
 import sounddevice as sd
-import wave
 from vosk import Model, KaldiRecognizer
-import threading 
 from ollama import chat
 from ollama import ChatResponse
 import random
 import time
 import subprocess as sp
+
+from TOOLS import search
+
 ############## WAKE WORD ###################
 wakeword = 'computer'
-agentname = 'ava'
+agentname = 'Omni man'
 ############## WAKE WORD ###################
 print(sd.query_devices())
 try:
-    devid = 'pulse'
+    devid = 'pipewire'
 except:
     devid = 'default'
 q = queue.Queue()
-model = Model(r"vosk-model-en-us-0.42-gigaspeech")
+model = Model(r"vosk-model-small-en-us-0.15")
 tts = TTS_RVC(model_path="model.pth",
               index_path="model.index",
               f0_method="rmvpe")
-tts.set_voice("en-US-JennyNeural") #FEMALE
-#tts.set_voice("en-US-BrianNeural") #MALE
+#tts.set_voice("en-US-JennyNeural") #FEMALE
+tts.set_voice("en-US-BrianNeural") #MALE
 
 
         ############################
@@ -77,11 +78,8 @@ def main():
             anything = False # change this to have a convo with the ai or dont [as]
             if rec.AcceptWaveform(data):
                 result = rec.Result()
-                cleanresult = result[14:-3]
-                print(cleanresult)
-                print(cleanresult[0:-4])
-                print(f' result is {len(cleanresult)}')
-                print(f' wakeword is {len(wakeword)}')
+                cleanresult = result[len(wakeword):-3]
+                print(cleanresult, flush=True)
                 if 'alexa' in result:
                     say(f'who are you calling alexa? my name is {agentname} and I will only respond to {wakeword}')
                 if wakeword in result:
@@ -99,19 +97,27 @@ def main():
                         else:
                             command('playerctl play &')
 
-                    elif f'{wakeword} what time is it' in result:
-                        gettime()
-                    elif f"{wakeword} what's the time" in result:
-                        gettime()
-                    elif f'{wakeword} what is the time' in result:
-                        gettime()
+                    elif f'{wakeword} what is' in result:
+                        # noinspection PyUnreachableCode
+                        if f'{wakeword} what is the time':
+                            gettime()
+                        elif f'{wakeword} what is the weather in':
+                            weath_req = (f'{cleanresult.split('what is the')[1]}')
+                            print(weath_req)
+                            temp = sp.check_output([f'python3 TOOLS/weather.py --prompt "{weath_req}"'], shell=True,
+                                                   text=True)
+                            say(f'the {weath_req} is {temp}degrees Fahrenheit')
+
+                        else:
+                            search = sp.check_output([f'python3 TOOLS/search.py --prompt "{cleanresult.split({wakeword})[1]}'])
+                            say(search)
                     elif f'{wakeword} resume' in result:
                         command('playerctl play &')
                     elif f'{wakeword} what is the weather in' in result:
                         weath_req = (f'{cleanresult.split('what is the')[1]}')
                         print(weath_req)
-                        sp.check_output([f'python3 TOOLS/weather.py --prompt "{weath_req}"'], shell=True, text=True)
-                        say(f'the {weath_req} is {temp}degrees fahrenheit')
+                        temp = sp.check_output([f'python3 TOOLS/weather.py --prompt "{weath_req}"'], shell=True, text=True)
+                        say(f'the {weath_req} is {temp}degrees Fahrenheit')
                         time.sleep(5)
                     elif f'{wakeword} set a timer for' in result:
                         command(f'python TOOLS/timer.py --prompt "{cleanresult}" &')
@@ -151,7 +157,7 @@ def main():
                 else:
                     pass
             else:
-                print(rec.PartialResult())
+                print(rec.PartialResult(), flush=True)
                 pass
 
 
@@ -171,7 +177,7 @@ def gotoai(x):
 
 
 x = False
-while True:
+while __name__ == '__main__':
     if x == False:
         say(f'test')
     else:
