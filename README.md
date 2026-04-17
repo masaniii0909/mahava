@@ -38,5 +38,5 @@ requires the following:
 - sounddevice
 
 # disclaimer
-has been tested on two pcs, one with a ryzen 7 5800xt and nvidia 3060. it is very fast on that machine.
-but on another machine with an intel i7 8th gen and 1660ti, it is pretty slow, especially because of the tts with rvc. i'll release a server version where something like an rpi could be a mic+speaker and sends the vosk speech recognition to a pc. 
+has been tested on three pcs, one with a ryzen 7 5800xt and nvidia 3060. it is very fast on that machine.
+but on another machine with an intel i7 8th gen and 1660ti, it is noticeably slower, especially because of the tts with rvc. i'll release a server version where something like an rpi could be a mic+speaker and sends the vosk speech recognition to a pc. 
