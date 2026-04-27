@@ -1,7 +1,7 @@
-# maava
-My Attempt At Voice Assistant
+# mahava
+My Attempt At Home Voice Assistant
 
-highschool comp sci student's attempt at a hackable linux voice assistant that is aimed at beginner python programmers to make their own or just to use for fun.
+highschool comp sci student's attempt at a hackable home assistant.
 
 # features
 
@@ -15,7 +15,7 @@ highschool comp sci student's attempt at a hackable linux voice assistant that i
 - all commands are the elif statements that listen for the wakeword and whatever prompt is in there
 - this does come with some caveats, however.
 ### premade commands 
-- some media control commands are already made!
+- some media control commands are already made! however they are for spotify.
 - timer
 - this can help you get started on adding more commands and features!
 ### future features
