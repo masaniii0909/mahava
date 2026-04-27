@@ -1,5 +1,5 @@
 # mahava
-My Attempt At Home Voice Assistant
+My Attempt at Home assistant Voice Assistant
 
 highschool comp sci student's attempt at a hackable home assistant.
 
